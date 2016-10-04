@@ -1,4 +1,6 @@
 #include "Game.h"
+#include <SFGUI/SFGUI.hpp>
+#include <SFGUI/Widgets.hpp>
 #include <iostream>
 
 Game::Game()
@@ -15,14 +17,9 @@ void Game::settings()
 	gameState = GAMESTATE::PLAY;
 	window.setFramerateLimit(60);
 
-	
 	_entities.push_back(std::make_shared<Basketball_Court>(_resource));
 	_entities.push_back(std::make_shared<Basketball>(_resource));
 	_entities.push_back(std::make_shared<Basketball_hoop>(_resource));
-	
-
-	
-	
 }
 
 void Game::run()
@@ -30,7 +27,6 @@ void Game::run()
 	settings();
 	initializeGame();
 	gameLoop();
-
 }
 
 void Game::gameLoop()
@@ -47,6 +43,10 @@ void Game::gameLoop()
 			{
 				gameState = GAMESTATE::EXIT;
 			}
+			else
+			{
+				gameUI->HandleEvents(event);
+			}
 		}
 
 		time = gameTime.getElapsedTime();
@@ -55,6 +55,10 @@ void Game::gameLoop()
 		draw();
 		window.display();
 	}
+
+	// release resources
+	delete gameUI;
+	delete basketball;
 }
 
 void Game::initializeGame()
@@ -63,6 +67,10 @@ void Game::initializeGame()
 	{
 		i->initialize(screenWidth, screenHeight);
 	}
+
+	basketball = new Basketball(_resource);
+
+	gameUI = new UI(basketball);
 }
 
 void Game::update(float delta)
@@ -71,6 +79,8 @@ void Game::update(float delta)
 	{
 		i->update(delta);
 	}
+
+	gameUI->Update(delta);
 }
 
 void Game::draw()
@@ -80,4 +90,5 @@ void Game::draw()
 		i->draw(window); 	
 	}
 
+	gameUI->Draw(window);
 }

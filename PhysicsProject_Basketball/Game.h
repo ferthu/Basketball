@@ -8,8 +8,10 @@
 #include "Basketball_Court.h"
 #include "Basketball.h"
 #include "Entity.h"
+#include "UI.h"
 
 #include <vector>
+
 class Game
 {
 public:
@@ -28,6 +30,12 @@ private:
 	void update(float delta);
 	// Draws The Game
 	void draw();
+
+	// game UI
+	UI* gameUI;
+
+	// basketball
+	Basketball* basketball;
 	
 	// The Game Window
 	sf::RenderWindow window;
@@ -46,6 +54,5 @@ private:
 	
 	std::shared_ptr<ResourceManager> _resource; 
 	std::vector<std::shared_ptr<Entity>> _entities;
-	
 };
 #endif

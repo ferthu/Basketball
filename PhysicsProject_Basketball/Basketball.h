@@ -6,7 +6,6 @@
 class Basketball : public Entity
 {
 public:
-	Basketball(){ }
 	Basketball(std::shared_ptr<ResourceManager> resource);
 
 	void initialize(int screenWidth, int screenHeight);
@@ -15,11 +14,32 @@ public:
 
 	sf::Sprite& getSprite();
 
-private:
-	// In Centimeters.
-	float circumference;
-	// In Grams.
-	float weight;
+	float getAngluarVelocity();
+	void setAngularVelocity(const float& angularVelocity);
+	bool getActive();
+	void setActive(bool active);
+	sf::Vector2f getBasePosition();
+	void setBasePosition(const sf::Vector2f& basePosition);
+	sf::Vector2f getPosition();
+	void setPosition(const sf::Vector2f& position);
+	sf::Vector2f getVelocity();
+	void setVelocity(const sf::Vector2f& velocity);
 
+private:
+	Basketball() {}
+
+	// in meters
+	float radius;
+	// in kilograms
+	float weight;
+	// in rad/s counterclockwise
+	float angularVelocity;
+	// turns physics on/off
+	bool active;
+
+	// start position of ball
+	sf::Vector2f basePosition;
+	sf::Vector2f position;
+	sf::Vector2f velocity;
 };
 #endif
