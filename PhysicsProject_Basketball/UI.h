@@ -28,10 +28,20 @@ private:
 
 	sfg::Window::Ptr UIWindow;
 
+	sfg::Table::Ptr UITable;
+
+	sfg::Label::Ptr velocityLabel;
+	sfg::Entry::Ptr velocityXEntry;
+	sfg::Entry::Ptr velocityYEntry;
+
+	sfg::Label::Ptr angularVelocityLabel;
+	sfg::Entry::Ptr angularVelocityEntry;
+
 	sfg::Button::Ptr startButton;
 	sfg::Button::Ptr resetButton;
 
 	sfg::Box::Ptr UIBox;
+	sfg::Box::Ptr buttonsBox;
 };
 
 #endif

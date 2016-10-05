@@ -6,6 +6,8 @@ Basketball::Basketball(std::shared_ptr<ResourceManager> resource) : Entity(resou
 	weight = 0.62369f;
 
 	angularVelocity = 0.0f;
+	angle = 0.0f;
+
 	active = false;
 
 	basePosition = sf::Vector2f(100.0f, 100.0f);
@@ -16,16 +18,20 @@ Basketball::Basketball(std::shared_ptr<ResourceManager> resource) : Entity(resou
 void Basketball::initialize(int screenWidth, int screenHeight)
 {
 	RM->spriteCache.defaultSpriteSetup("basketball", "Sprites/basketball.png");
-	RM->getSprite("basketball").setScale(1, 1);
+	RM->getSprite("basketball").setScale(radius, radius);
 	
 }
 void Basketball::update(float delta)
 {
-
+	if (active)
+	{
+		position += velocity * delta;
+	}
 }
 
 void Basketball::draw(sf::RenderWindow& window)
 {
+	RM->getSprite("basketball").setPosition(position);
 	window.draw(RM->getSprite("basketball"));
 }
 
@@ -73,4 +79,12 @@ sf::Vector2f Basketball::getVelocity()
 void Basketball::setVelocity(const sf::Vector2f& velocity)
 {
 	this->velocity = velocity;
+}
+float Basketball::getAngle()
+{
+	return angle;
+}
+void Basketball::setAngle(const float& angle)
+{
+	this->angle = angle;
 }

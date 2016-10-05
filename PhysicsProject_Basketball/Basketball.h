@@ -14,6 +14,8 @@ public:
 
 	sf::Sprite& getSprite();
 
+	float getAngle();
+	void setAngle(const float& angle);
 	float getAngluarVelocity();
 	void setAngularVelocity(const float& angularVelocity);
 	bool getActive();
@@ -34,6 +36,8 @@ private:
 	float weight;
 	// in rad/s counterclockwise
 	float angularVelocity;
+	// in rad, counterclockwise
+	float angle;
 	// turns physics on/off
 	bool active;
 
