@@ -59,7 +59,8 @@ private:
 
 	const float pixelsPerMeter = 100.0f;
 
+	//Walls
 	std::shared_ptr<Wall> walls[4];
-	//Wall* walls[4];
+	
 };
 #endif
