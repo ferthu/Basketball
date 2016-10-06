@@ -58,10 +58,7 @@ void Game::gameLoop()
 	// release resources
 	delete gameUI;
 	delete basketball;
-	delete walls[0];
-	delete walls[1];
-	delete walls[2];
-	delete walls[3];
+	
 }
 
 void Game::initializeGame()
@@ -76,10 +73,11 @@ void Game::initializeGame()
 
 	gameUI = new UI(basketball);
 
-	walls[0] = new Wall(sf::Vector2f(0.0f, 1.0f), 0.0f, 0.8f);					// top
-	walls[1] = new Wall(sf::Vector2f(1.0f, 0.0f), 0.0f, 0.8f);					// left
-	walls[2] = new Wall(sf::Vector2f(0.0f, -1.0f), (float)screenHeight, 0.8f);	// bottom
-	walls[3] = new Wall(sf::Vector2f(-1.0f, 0.0f), (float)screenWidth, 0.8f);	// right
+	
+	walls[0] = std::make_shared<Wall>(sf::Vector2f(0.0f, 1.0f), 0.0f, 0.8f);					// top
+	walls[1] = std::make_shared<Wall>(sf::Vector2f(1.0f, 0.0f), 0.0f, 0.8f);					// left
+	walls[2] = std::make_shared<Wall>(sf::Vector2f(0.0f, -1.0f), (float)screenHeight, 0.8f);    // bottom
+	walls[3] = std::make_shared<Wall>(sf::Vector2f(-1.0f, 0.0f), (float)screenWidth, 0.8f);	   // right
 }
 
 void Game::update(float delta)
