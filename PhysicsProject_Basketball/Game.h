@@ -9,6 +9,8 @@
 #include "Basketball.h"
 #include "Entity.h"
 #include "UI.h"
+#include "Wall.h"
+#include "CollisionObject.h"
 
 #include <vector>
 
@@ -56,5 +58,7 @@ private:
 	std::vector<std::shared_ptr<Entity>> _entities;
 
 	const float pixelsPerMeter = 100.0f;
+
+	Wall* walls[4];
 };
 #endif

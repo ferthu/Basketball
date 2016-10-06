@@ -23,7 +23,7 @@ void Basketball::initialize(int screenWidth, int screenHeight)
 
 	sf::Vector2u textureSize = RM->getSprite("basketball").getTexture()->getSize();
 
-	RM->getSprite("basketball").setScale(radius * pixelsPerMeter / textureSize.x, radius * pixelsPerMeter / textureSize.y);
+	RM->getSprite("basketball").setScale(radius * 2.0f * pixelsPerMeter / textureSize.x, radius * 2.0f * pixelsPerMeter / textureSize.y);
 
 	RM->getSprite("basketball").setOrigin(textureSize.x / 2.0f, textureSize.y / 2.0f);
 }
@@ -31,6 +31,8 @@ void Basketball::update(float delta)
 {
 	if (active)
 	{
+		velocity += sf::Vector2f(0.0f, 9.82f) * delta;
+
 		position += velocity * delta * pixelsPerMeter;
 		angle += angularVelocity * delta;
 
@@ -100,4 +102,12 @@ float Basketball::getAngle()
 void Basketball::setAngle(const float& angle)
 {
 	this->angle = angle;
+}
+float Basketball::getRadius()
+{
+	return radius;
+}
+void Basketball::setRadius(const float& radius)
+{
+	this->radius = radius;
 }

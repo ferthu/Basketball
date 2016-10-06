@@ -23,11 +23,13 @@
     <ClCompile Include="SpriteCache.cpp" />
     <ClCompile Include="TextureCache.cpp" />
     <ClCompile Include="UI.cpp" />
+    <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Basketball.h" />
     <ClInclude Include="Basketball_Court.h" />
     <ClInclude Include="Basketball_hoop.h" />
+    <ClInclude Include="CollisionObject.h" />
     <ClInclude Include="drawSprite.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
@@ -36,6 +38,7 @@
     <ClInclude Include="SpriteCache.h" />
     <ClInclude Include="Test.h" />
     <ClInclude Include="UI.h" />
+    <ClInclude Include="Wall.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{45341340-576C-4DC8-928F-49F1904CB815}</ProjectGuid>

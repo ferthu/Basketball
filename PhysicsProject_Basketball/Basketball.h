@@ -16,6 +16,8 @@ public:
 
 	float getAngle();
 	void setAngle(const float& angle);
+	float getRadius();
+	void setRadius(const float& radius);
 	float getAngluarVelocity();
 	void setAngularVelocity(const float& angularVelocity);
 	bool getActive();

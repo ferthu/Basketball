@@ -58,6 +58,10 @@ void Game::gameLoop()
 	// release resources
 	delete gameUI;
 	delete basketball;
+	delete walls[0];
+	delete walls[1];
+	delete walls[2];
+	delete walls[3];
 }
 
 void Game::initializeGame()
@@ -71,6 +75,11 @@ void Game::initializeGame()
 	basketball->initialize(screenWidth, screenHeight);
 
 	gameUI = new UI(basketball);
+
+	walls[0] = new Wall(sf::Vector2f(0.0f, 1.0f), 0.0f, 0.8f);					// top
+	walls[1] = new Wall(sf::Vector2f(1.0f, 0.0f), 0.0f, 0.8f);					// left
+	walls[2] = new Wall(sf::Vector2f(0.0f, -1.0f), (float)screenHeight, 0.8f);	// bottom
+	walls[3] = new Wall(sf::Vector2f(-1.0f, 0.0f), (float)screenWidth, 0.8f);	// right
 }
 
 void Game::update(float delta)
@@ -81,6 +90,14 @@ void Game::update(float delta)
 	}
 	gameUI->Update(delta);
 	basketball->update(delta);
+
+	if (basketball->getActive())
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			walls[i]->checkHandleBallCollision(*basketball, pixelsPerMeter);
+		}
+	}
 }
 
 void Game::draw()
@@ -90,6 +107,6 @@ void Game::draw()
 		i->draw(window); 	
 	}
 
-	gameUI->Draw(window);
 	basketball->draw(window);
+	gameUI->Draw(window);
 }
