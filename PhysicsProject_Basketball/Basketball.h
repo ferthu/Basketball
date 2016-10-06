@@ -6,7 +6,7 @@
 class Basketball : public Entity
 {
 public:
-	Basketball(std::shared_ptr<ResourceManager> resource);
+	Basketball(std::shared_ptr<ResourceManager> resource, float pixelsPerMeter);
 
 	void initialize(int screenWidth, int screenHeight);
 	void update(float delta);
@@ -45,5 +45,7 @@ private:
 	sf::Vector2f basePosition;
 	sf::Vector2f position;
 	sf::Vector2f velocity;
+
+	float pixelsPerMeter;
 };
 #endif

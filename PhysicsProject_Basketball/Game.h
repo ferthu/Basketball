@@ -54,5 +54,7 @@ private:
 	
 	std::shared_ptr<ResourceManager> _resource; 
 	std::vector<std::shared_ptr<Entity>> _entities;
+
+	const float pixelsPerMeter = 100.0f;
 };
 #endif

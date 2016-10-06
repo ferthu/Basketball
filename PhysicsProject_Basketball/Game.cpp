@@ -18,7 +18,6 @@ void Game::settings()
 	window.setFramerateLimit(60);
 
 	_entities.push_back(std::make_shared<Basketball_Court>(_resource));
-	//_entities.push_back(std::make_shared<Basketball>(_resource));
 	_entities.push_back(std::make_shared<Basketball_hoop>(_resource));
 }
 
@@ -68,7 +67,7 @@ void Game::initializeGame()
 		i->initialize(screenWidth, screenHeight);
 	}
 
-	basketball = new Basketball(_resource);
+	basketball = new Basketball(_resource, pixelsPerMeter);
 	basketball->initialize(screenWidth, screenHeight);
 
 	gameUI = new UI(basketball);
