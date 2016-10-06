@@ -76,7 +76,7 @@ void UI::StartBall()
 	{
 		ball->setActive(true);
 
-		ball->setVelocity(sf::Vector2f(std::stof(velocityXEntry->GetText().toAnsiString()), std::stof(velocityYEntry->GetText().toAnsiString())));
+		ball->setVelocity(sf::Vector2f(std::stof(velocityXEntry->GetText().toAnsiString()), -std::stof(velocityYEntry->GetText().toAnsiString())));
 
 		ball->setAngularVelocity(std::stof(angularVelocityEntry->GetText().toAnsiString()));
 		ball->setAngle(0.0f);
