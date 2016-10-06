@@ -68,6 +68,7 @@ void Players::update(float delta)
 
 void Players::draw(sf::RenderWindow& window)
 {
+	// Player Currently not drawing, Have to fix so it works properly.
 	/*if (playerTurn == 1 && active)
 	{
 		window.draw(RM->getSprite("Player1"));
