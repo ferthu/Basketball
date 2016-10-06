@@ -12,7 +12,7 @@ Basketball::Basketball(std::shared_ptr<ResourceManager> resource, float pixelsPe
 
 	this->pixelsPerMeter = pixelsPerMeter;
 
-	basePosition = sf::Vector2f(100.0f, 400.0f);
+	basePosition = sf::Vector2f(170.0f, 385.0f);
 	position = basePosition;
 	velocity = sf::Vector2f(0.0f, 0.0f);
 }
