@@ -22,6 +22,7 @@ public:
 private:
 	int playerTurn;
 	bool active;
+	bool reset; // True if the reset button was hit. Then it goes back to false.
 	std::shared_ptr<Basketball> ball;
 	sf::Vector2f basePosition;
 	
