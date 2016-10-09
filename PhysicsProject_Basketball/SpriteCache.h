@@ -4,13 +4,15 @@
 #include <string>
 #include <map>
 
-#include "drawSprite.h"
-#include "loadSprite.h"
+#include "CreateSprite.h"
+
 #include <memory>
+
 class SpriteCache
+
 {
 public:
-	SpriteCache() { _loadSprite = std::make_shared<loadSprite>(); }
+	SpriteCache() { _createSprite = std::make_shared<CreateSprite>(); }
 
 	void setupSpriteRect(const std::string spriteName, const std::string path, sf::IntRect rect);
 	void defaultSpriteSetup(const std::string spriteName, const std::string path);
@@ -21,6 +23,6 @@ private:
 
 	sf::Sprite sprite;
 	// Used To Load The Sprite.
-	std::shared_ptr<loadSprite> _loadSprite;
+	std::shared_ptr<CreateSprite> _createSprite;
 };
 #endif

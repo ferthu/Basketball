@@ -3,7 +3,7 @@
 
 void SpriteCache::setupSpriteRect(const std::string name, const std::string path, sf::IntRect rect)
 {
-	sprite = this->_loadSprite->loadSpriteRect(name, path, rect);
+	sprite = this->_createSprite->loadSpriteRect(name, path, rect);
 
 	auto spriteIterator = sprites.find(name); // Iterates through all sprites to check if the name the user has chosen for the sprite is already taken.
 
@@ -19,7 +19,7 @@ void SpriteCache::setupSpriteRect(const std::string name, const std::string path
 
 void SpriteCache::defaultSpriteSetup(const std::string name, const std::string path)
 {
-	sprite = this->_loadSprite->defaultSpriteLoad(name, path);
+	sprite = this->_createSprite->defaultSpriteLoad(name, path);
 
 	auto spriteIterator = sprites.find(name); // Iterates through all sprites to check if the name the user has chosen for the sprite is already taken.
 
