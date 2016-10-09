@@ -18,7 +18,11 @@ public:
 	bool getActive();
 	void setActive(bool active);
 
-	
+	int getPlayerTurn();
+	void setPlayerTurn(int playerTurn);
+
+	bool getReset();
+	void setReset(bool reset);
 private:
 	int playerTurn;
 	bool active;
