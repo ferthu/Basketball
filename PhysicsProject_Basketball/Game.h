@@ -4,6 +4,7 @@
 //SFML
 #include <SFML\graphics.hpp>
 
+#include "Players.h"
 #include "Basketball_hoop.h"
 #include "Basketball_Court.h"
 #include "Basketball.h"
@@ -37,7 +38,8 @@ private:
 	UI* gameUI;
 
 	// basketball
-	Basketball* basketball;
+	std::shared_ptr<Basketball> basketball;
+	
 	
 	// The Game Window
 	sf::RenderWindow window;

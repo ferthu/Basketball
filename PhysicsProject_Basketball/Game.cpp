@@ -19,6 +19,8 @@ void Game::settings()
 
 	_entities.push_back(std::make_shared<Basketball_Court>(_resource));
 	_entities.push_back(std::make_shared<Basketball_hoop>(_resource));
+	basketball = std::make_shared<Basketball>(_resource, pixelsPerMeter);
+	_entities.push_back(std::make_shared<Players>(_resource, basketball));
 }
 
 void Game::run()
@@ -57,7 +59,6 @@ void Game::gameLoop()
 
 	// release resources
 	delete gameUI;
-	delete basketball;
 }
 
 void Game::initializeGame()
@@ -67,7 +68,7 @@ void Game::initializeGame()
 		i->initialize(screenWidth, screenHeight);
 	}
 
-	basketball = new Basketball(_resource, pixelsPerMeter);
+	
 	basketball->initialize(screenWidth, screenHeight);
 
 	gameUI = new UI(basketball);

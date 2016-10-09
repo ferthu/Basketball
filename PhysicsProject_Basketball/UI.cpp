@@ -1,7 +1,7 @@
 #include "UI.h"
 #include <string>
 
-UI::UI(Basketball* ball)
+UI::UI(std::shared_ptr<Basketball> ball)
 {
 	this->ball = ball;
 

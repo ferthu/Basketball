@@ -9,7 +9,7 @@
 class UI
 {
 public:
-	UI(Basketball* ball);
+	UI(std::shared_ptr<Basketball> ball);
 
 	void HandleEvents(const sf::Event& event);
 
@@ -22,7 +22,7 @@ private:
 	void ResetBall();
 	void StartBall();
 
-	Basketball* ball;
+	std::shared_ptr<Basketball> ball;
 
 	sfg::SFGUI sfgui;
 
