@@ -1,4 +1,5 @@
 #include "Basketball.h"
+#include "VectorFunctions.h"
 
 Basketball::Basketball(std::shared_ptr<ResourceManager> resource, float pixelsPerMeter) : Entity(resource)
 {
@@ -110,4 +111,25 @@ float Basketball::getRadius()
 void Basketball::setRadius(const float& radius)
 {
 	this->radius = radius;
+}
+
+void Basketball::handleCollision(sf::Vector2f otherCollisionNormal, float otherCollisionPlaneDistance, float e, float delta)
+{
+	float positionAlongNormal = dot(otherCollisionNormal, position);
+	float velocityAlongNormal = dot(otherCollisionNormal, velocity);
+	float collisionDistance = radius * pixelsPerMeter - otherCollisionPlaneDistance;
+
+	// collision
+	if (positionAlongNormal <= collisionDistance && velocityAlongNormal < 0)
+	{
+		// move out of wall
+		position = position + otherCollisionNormal * (collisionDistance - positionAlongNormal);
+
+		// find surface direction
+		sf::Vector2f surfaceDirection = -v3tov2(cross(v2tov3(otherCollisionNormal), sf::Vector3f(0.0f,0.0f,1.0f)));
+
+		sf::Vector2f newVelocity = (((1 - (2.0f / 5.0f) * e) * dot(surfaceDirection, velocity) + (2.0f / 5.0f) * (1.0f + e) * radius * -angularVelocity) / (1.0f + 2.0f / 5.0f)) * surfaceDirection - e * dot(velocity, otherCollisionNormal) * otherCollisionNormal;
+		angularVelocity = -((1.0f + e) * dot(surfaceDirection, velocity) + (2.0f / 5.0f - e) * radius * -angularVelocity) / (radius * (1.0f + 2.0f / 5.0f));
+		velocity = newVelocity;
+	}
 }

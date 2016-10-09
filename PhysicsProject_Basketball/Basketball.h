@@ -29,6 +29,8 @@ public:
 	sf::Vector2f getVelocity();
 	void setVelocity(const sf::Vector2f& velocity);
 
+	void handleCollision(sf::Vector2f otherCollisionNormal, float otherCollisionPlaneDistance, float e, float delta);
+
 private:
 	Basketball() {}
 

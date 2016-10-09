@@ -7,7 +7,7 @@ class Wall : public CollisionObject
 {
 public:
 	Wall(sf::Vector2f normal, float distance, float e);
-	virtual void checkHandleBallCollision(Basketball& ball, float pixelsPerMeter);
+	virtual void checkBallCollision(Basketball& ball, float pixelsPerMeter, float delta);
 private:
 	sf::Vector2f normal;
 	float distance;

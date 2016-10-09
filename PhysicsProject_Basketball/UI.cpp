@@ -42,7 +42,7 @@ UI::UI(Basketball* ball)
 
 	UIWindow->Add(UIBox);
 
-	UIWindow->SetPosition(sf::Vector2f(10.0f, 460.0f));
+	UIWindow->SetPosition(sf::Vector2f(10.0f, 10.0f));
 	UIWindow->SetRequisition(sf::Vector2f(300.0f, 130.0f));
 }
 
@@ -67,6 +67,7 @@ void UI::ResetBall()
 	{
 		ball->setPosition(ball->getBasePosition());
 		ball->setActive(false);
+		ball->setAngle(0.0f);
 	}
 }
 
@@ -79,6 +80,5 @@ void UI::StartBall()
 		ball->setVelocity(sf::Vector2f(std::stof(velocityXEntry->GetText().toAnsiString()), -std::stof(velocityYEntry->GetText().toAnsiString())));
 
 		ball->setAngularVelocity(std::stof(angularVelocityEntry->GetText().toAnsiString()));
-		ball->setAngle(0.0f);
 	}
 }

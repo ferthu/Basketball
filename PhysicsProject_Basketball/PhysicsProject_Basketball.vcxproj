@@ -38,6 +38,7 @@
     <ClInclude Include="SpriteCache.h" />
     <ClInclude Include="Test.h" />
     <ClInclude Include="UI.h" />
+    <ClInclude Include="VectorFunctions.h" />
     <ClInclude Include="Wall.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

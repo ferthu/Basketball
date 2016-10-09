@@ -9,19 +9,7 @@ Wall::Wall(sf::Vector2f normal, float distance, float e)
 	this->e = e;
 }
 
-void Wall::checkHandleBallCollision(Basketball& ball, float pixelsPerMeter)
+void Wall::checkBallCollision(Basketball& ball, float pixelsPerMeter, float delta)
 {
-	float positionDot = normal.x * ball.getPosition().x + normal.y * ball.getPosition().y;
-	float velocityDot = normal.x * ball.getVelocity().x + normal.y * ball.getVelocity().y;
-
-	// collision
-	if (positionDot <= (ball.getRadius() * pixelsPerMeter - distance) && velocityDot < 0)
-	{
-		// move out of wall
-		ball.setPosition(ball.getPosition() + normal * ((ball.getRadius() * pixelsPerMeter - distance) - positionDot));
-
-		float newLineOfActionVelocity = -velocityDot * e;
-
-		ball.setVelocity(ball.getVelocity() + normal * (newLineOfActionVelocity - velocityDot));
-	}
+	ball.handleCollision(normal, distance, e, delta);
 }

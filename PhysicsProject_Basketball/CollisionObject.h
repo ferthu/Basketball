@@ -7,7 +7,8 @@ class CollisionObject
 {
 public:
 	CollisionObject() {};
-	virtual void checkHandleBallCollision(Basketball& ball, float pixelsPerMeter) = 0;
+	float frictionCoefficient;
+	virtual void checkBallCollision(Basketball& ball, float pixelsPerMeter, float delta) = 0;
 private:
 };
 

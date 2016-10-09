@@ -58,7 +58,6 @@ void Game::gameLoop()
 	// release resources
 	delete gameUI;
 	delete basketball;
-	
 }
 
 void Game::initializeGame()
@@ -93,7 +92,7 @@ void Game::update(float delta)
 	{
 		for (int i = 0; i < 4; i++)
 		{
-			walls[i]->checkHandleBallCollision(*basketball, pixelsPerMeter);
+			walls[i]->checkBallCollision(*basketball, pixelsPerMeter, delta);
 		}
 	}
 }
