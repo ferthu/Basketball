@@ -6,14 +6,6 @@
 Basketball_hoop::Basketball_hoop(std::shared_ptr<ResourceManager> resource) : Entity(resource)
 {
 
-
-Basketball_hoop::Basketball_hoop(sf::Vector2f normal, float distance, float e)
-{
-	float normalLenght = std::sqrtf(normal.x * normal.x + normal.y * normal.y);
-	this->normal = sf::Vector2f(normal.x / normalLenght, normal.y / normalLenght);
-	this->distance = distance;
-	this->e = e;
-
 }
 
 void Basketball_hoop::initialize(int screenWidth, int screenHeight)
@@ -42,16 +34,9 @@ sf::Sprite& Basketball_hoop::getSprite()
 	return RM->getSprite("basketball_hoop");
 }
 
-
-
 void Basketball_hoop::setRectangleShape(sf::Vector2f position, sf::Vector2f size, sf::Color color)
 {
 	basketCollisionRect.setPosition(position);
 	basketCollisionRect.setSize(size);
 	basketCollisionRect.setFillColor(color);
-}
-
-void Basketball_hoop::checkBallCollision(Basketball& ball, float pixelsPerMeter, float delta)
-{
-	
 }
