@@ -3,8 +3,6 @@
 
 #include "Entity.h"
 
-class Basketball_hoop;
-
 class Basketball : public Entity
 {
 public:
@@ -30,8 +28,11 @@ public:
 	void setPosition(const sf::Vector2f& position);
 	sf::Vector2f getVelocity();
 	void setVelocity(const sf::Vector2f& velocity);
+	void setFail(bool active);
+	bool getFail();
 
 	void handleCollision(sf::Vector2f otherCollisionNormal, float otherCollisionPlaneDistance, float e, float delta);
+	
 	void setCircleShape(sf::Vector2f position, float radius, sf::Color color);
 
 	// Circle Based Collision
@@ -50,7 +51,8 @@ private:
 	float angle;
 	// turns physics on/off
 	bool active;
-
+	// Ball Hit a wall, Cant score anymore.
+	bool fail;
 	// start position of ball
 	sf::Vector2f basePosition;
 	sf::Vector2f position;

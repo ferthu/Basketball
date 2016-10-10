@@ -11,6 +11,7 @@ Basketball::Basketball(std::shared_ptr<ResourceManager> resource, float pixelsPe
 	angle = 0.0f;
 
 	active = false;
+	fail = false;
 
 	this->pixelsPerMeter = pixelsPerMeter;
 
@@ -31,6 +32,7 @@ void Basketball::initialize(int screenWidth, int screenHeight)
 }
 void Basketball::update(float delta)
 {
+	
 	if (active)
 	{
 		velocity += sf::Vector2f(0.0f, 9.82f) * delta;
@@ -56,7 +58,7 @@ void Basketball::update(float delta)
 		angle += angularVelocity * delta;
 
 		//angularVelocity = angularVelocity * std::powf(0.999f, std::powf((angularVelocity >= 0.0f ? angularVelocity : -angularVelocity) / 10000.0f, 2.0f));
-
+		
 		/*while (angle > 6.28318530718f)
 			angle -= 6.28318530718f;
 		while (angle < 0)
@@ -66,6 +68,7 @@ void Basketball::update(float delta)
 
 void Basketball::draw(sf::RenderWindow& window)
 {
+	
 	// Final Position of the ball
 	RM->getSprite("basketball").setPosition(position);
 	// Position Of The Ball's collision circle.
@@ -73,7 +76,7 @@ void Basketball::draw(sf::RenderWindow& window)
 		RM->getSprite("basketball").getPosition().y - 25), 24.6, sf::Color::Black);
 	// Final Rotation of the ball.
 	RM->getSprite("basketball").setRotation(-angle / 6.28318530718f * 360.0f);
-
+	
 	window.draw(RM->getSprite("basketball"));
 	//window.draw(CircleCollisionBall);
 }
@@ -140,21 +143,33 @@ void Basketball::setRadius(const float& radius)
 	this->radius = radius;
 }
 
+void Basketball::setFail(bool active)
+{
+	this->fail = active;
+}
+
+bool Basketball::getFail()
+{
+	return fail;
+}
+
 void Basketball::handleCollision(sf::Vector2f otherCollisionNormal, float otherCollisionPlaneDistance, float e, float delta)
 {
 	float positionAlongNormal = dot(otherCollisionNormal, position);
 	float velocityAlongNormal = dot(otherCollisionNormal, velocity);
 	float collisionDistance = radius * pixelsPerMeter - otherCollisionPlaneDistance;
 
-
 	// move out of wall
 	if (positionAlongNormal <= collisionDistance)
 	{
+		
 		position = position + otherCollisionNormal * (collisionDistance - positionAlongNormal);
 
 		// collision
 		if (velocityAlongNormal < 0)
 		{
+			setFail(true);
+
 			// find surface direction
 			sf::Vector2f surfaceDirection = -v3tov2(cross(v2tov3(otherCollisionNormal), sf::Vector3f(0.0f, 0.0f, 1.0f)));
 
@@ -164,6 +179,8 @@ void Basketball::handleCollision(sf::Vector2f otherCollisionNormal, float otherC
 		}
 	}
 }
+
+
 
 void Basketball::setCircleShape(sf::Vector2f position, float radius, sf::Color color)
 {

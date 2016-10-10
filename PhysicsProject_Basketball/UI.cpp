@@ -63,8 +63,10 @@ void UI::HandleEvents(const sf::Event& event)
 
 void UI::ResetBall()
 {
+
 	if (ball->getActive())
 	{
+		ball->setFail(false);
 		ball->setPosition(ball->getBasePosition());
 		ball->setActive(false);
 		ball->setAngle(0.0f);
