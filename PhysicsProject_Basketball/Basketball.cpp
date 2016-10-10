@@ -4,7 +4,7 @@
 #include <iostream>
 Basketball::Basketball(std::shared_ptr<ResourceManager> resource, float pixelsPerMeter) : Entity(resource)
 {
-	radius = 0.2426f; 
+	radius = 0.1213f; 
 	weight = 0.62369f;
 
 	angularVelocity = 0.0f;

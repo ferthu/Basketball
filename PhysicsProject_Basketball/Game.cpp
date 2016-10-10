@@ -82,6 +82,7 @@ void Game::initializeGame()
 
 	
 	basketball->initialize(screenWidth, screenHeight);
+	hoop->pixelsPerMeter = pixelsPerMeter;
 	hoop->initialize(screenWidth, screenHeight);
 	gameUI = new UI(basketball);
 

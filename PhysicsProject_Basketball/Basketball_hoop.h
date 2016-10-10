@@ -2,6 +2,7 @@
 #define BASKETBALL_HOOP_HPP
 
 #include "Entity.h"
+#include "Game.h"
 
 class Basketball_hoop : public Entity
 {
@@ -18,7 +19,9 @@ public:
 	// Rectangle Based Collision for the basket
 	sf::RectangleShape basketCollisionRect;
 
+	float pixelsPerMeter;
 private:
+
 	
 };
 #endif
