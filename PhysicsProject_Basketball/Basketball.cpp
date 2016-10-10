@@ -1,6 +1,7 @@
 #include "Basketball.h"
 #include "VectorFunctions.h"
-
+#include <cmath>
+#include <iostream>
 Basketball::Basketball(std::shared_ptr<ResourceManager> resource, float pixelsPerMeter) : Entity(resource)
 {
 	radius = 0.2426f; 
@@ -27,9 +28,14 @@ void Basketball::initialize(int screenWidth, int screenHeight)
 	RM->getSprite("basketball").setScale(radius * 2.0f * pixelsPerMeter / textureSize.x, radius * 2.0f * pixelsPerMeter / textureSize.y);
 
 	RM->getSprite("basketball").setOrigin(textureSize.x / 2.0f, textureSize.y / 2.0f);
+
+	
+
+	
 }
 void Basketball::update(float delta)
 {
+	
 	if (active)
 	{
 		velocity += sf::Vector2f(0.0f, 9.82f) * delta;
@@ -42,13 +48,20 @@ void Basketball::update(float delta)
 		while (angle < 0)
 			angle += 6.28318530718f;
 	}
+
+	// Final Position of the ball
+	RM->getSprite("basketball").setPosition(position);
+	// Position Of The Ball's collision circle.
+	setCircleShape(sf::Vector2f(RM->getSprite("basketball").getPosition().x - 25
+		, RM->getSprite("basketball").getPosition().y - 25), 24.6, sf::Color::Black);
+	// Final Rotation of the ball.
+	RM->getSprite("basketball").setRotation(-angle / 6.28318530718f * 360.0f);
 }
 
 void Basketball::draw(sf::RenderWindow& window)
 {
-	RM->getSprite("basketball").setPosition(position);
-	RM->getSprite("basketball").setRotation(-angle / 6.28318530718f * 360.0f);
 	window.draw(RM->getSprite("basketball"));
+	//window.draw(CircleCollisionBall);
 }
 
 sf::Sprite& Basketball::getSprite()
@@ -124,7 +137,7 @@ void Basketball::handleCollision(sf::Vector2f otherCollisionNormal, float otherC
 	{
 		// move out of wall
 		position = position + otherCollisionNormal * (collisionDistance - positionAlongNormal);
-
+		
 		// find surface direction
 		sf::Vector2f surfaceDirection = -v3tov2(cross(v2tov3(otherCollisionNormal), sf::Vector3f(0.0f,0.0f,1.0f)));
 
@@ -132,4 +145,13 @@ void Basketball::handleCollision(sf::Vector2f otherCollisionNormal, float otherC
 		angularVelocity = -((1.0f + e) * dot(surfaceDirection, velocity) + (2.0f / 5.0f - e) * radius * -angularVelocity) / (radius * (1.0f + 2.0f / 5.0f));
 		velocity = newVelocity;
 	}
+
 }
+
+void Basketball::setCircleShape(sf::Vector2f position, float radius, sf::Color color)
+{
+	CircleCollisionBall.setPosition(position);
+	CircleCollisionBall.setRadius(radius);
+	CircleCollisionBall.setFillColor(color);
+}
+

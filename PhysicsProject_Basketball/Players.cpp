@@ -32,11 +32,14 @@ void Players::update(float delta)
 		if (ball->getActive() && active)
 		{
 			reset = true;
+			setActive(false);
 		}
+
 		else if (!ball->getActive() && reset)
 		{
 			playerTurn = 2;
 			reset = false;
+			setActive(true);
 		}
 	}
 	else if (playerTurn == 2)
@@ -44,11 +47,13 @@ void Players::update(float delta)
 		if (ball->getActive() && active)
 		{
 			reset = true;
+			setActive(false);
 		}
 		else if (!ball->getActive() && reset)
 		{
 			playerTurn = 1;
 			reset = false;
+			setActive(true);
 		}
 	}
 }

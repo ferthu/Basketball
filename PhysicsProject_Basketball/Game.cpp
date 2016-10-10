@@ -19,8 +19,9 @@ void Game::settings()
 
 
 	_entities.push_back(std::make_shared<Basketball_Court>(_resource));
-	_entities.push_back(std::make_shared<Basketball_hoop>(_resource));
+	//_entities.push_back(std::make_shared<Basketball_hoop>(_resource, sf::Vector2f(-1.0f, 0.0f), (float)screenWidth - 150.0f, 0.8f));
 	_entities.push_back(std::make_shared<ScoreSystem>(_resource));
+	hoop = std::make_shared<Basketball_hoop>(_resource);
 	basketball = std::make_shared<Basketball>(_resource, pixelsPerMeter);
 	_entities.push_back(std::make_shared<Players>(_resource, basketball));
 	
@@ -50,6 +51,10 @@ void Game::gameLoop()
 			{
 				gameState = GAMESTATE::EXIT;
 			}
+			/*else if (sf::Event::MouseMoved)
+			{
+				std::cout << "X: " << event.mouseMove.x << " Y: " << event.mouseMove.y << std::endl;
+			}*/
 			else
 			{
 				gameUI->HandleEvents(event);
@@ -76,7 +81,7 @@ void Game::initializeGame()
 
 	
 	basketball->initialize(screenWidth, screenHeight);
-
+	hoop->initialize(screenWidth, screenHeight);
 	gameUI = new UI(basketball);
 
 	
@@ -94,13 +99,14 @@ void Game::update(float delta)
 	}
 	gameUI->Update(delta);
 	basketball->update(delta);
-
+	hoop->update(delta);
 	if (basketball->getActive())
 	{
 		for (int i = 0; i < 4; i++)
 		{
 			walls[i]->checkBallCollision(*basketball, pixelsPerMeter, delta);
 		}
+		
 	}
 }
 
@@ -112,5 +118,6 @@ void Game::draw()
 	}
 
 	basketball->draw(window);
+	hoop->draw(window);
 	gameUI->Draw(window);
 }

@@ -3,6 +3,8 @@
 
 #include "Entity.h"
 
+class Basketball_hoop;
+
 class Basketball : public Entity
 {
 public:
@@ -30,7 +32,11 @@ public:
 	void setVelocity(const sf::Vector2f& velocity);
 
 	void handleCollision(sf::Vector2f otherCollisionNormal, float otherCollisionPlaneDistance, float e, float delta);
+	void setCircleShape(sf::Vector2f position, float radius, sf::Color color);
 
+	// Circle Based Collision
+	sf::CircleShape CircleCollisionBall;
+	
 private:
 	Basketball() {}
 

@@ -40,7 +40,7 @@ private:
 
 	// basketball
 	std::shared_ptr<Basketball> basketball;
-	
+	std::shared_ptr<Basketball_hoop> hoop;
 	
 	// The Game Window
 	sf::RenderWindow window;
