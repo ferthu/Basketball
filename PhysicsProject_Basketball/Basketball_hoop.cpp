@@ -27,7 +27,6 @@ void Basketball_hoop::initialize(int screenWidth, int screenHeight)
 	// Adjust Position
 	RM->getSprite("basketball_hoop").setPosition(screenWidth - size * textureSize.x, 
 		screenHeight - size * textureSize.y);
-	RM->getSprite("basketball_hoop").setPosition(0, 0);
 }
 
 void Basketball_hoop::update(float delta)
