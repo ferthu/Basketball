@@ -88,7 +88,7 @@ void Game::initializeGame()
 	walls[0] = std::make_shared<Wall>(sf::Vector2f(0.0f, 1.0f), 0.0f, 0.8f);					// top
 	walls[1] = std::make_shared<Wall>(sf::Vector2f(1.0f, 0.0f), 0.0f, 0.8f);					// left
 	walls[2] = std::make_shared<Wall>(sf::Vector2f(0.0f, -1.0f), (float)screenHeight, 0.8f);    // bottom
-	walls[3] = std::make_shared<Wall>(sf::Vector2f(-1.0f, 0.0f), (float)screenWidth, 0.8f);	   // right
+	walls[3] = std::make_shared<Wall>(sf::Vector2f(-0.5f, 0.0f), (float)screenWidth, 0.8f);	   // right
 }
 
 void Game::update(float delta)
