@@ -8,6 +8,7 @@
 #include "Basketball_hoop.h"
 #include "Basketball_Court.h"
 #include "Basketball.h"
+#include "ScoreSystem.h"
 #include "Entity.h"
 #include "UI.h"
 #include "Wall.h"

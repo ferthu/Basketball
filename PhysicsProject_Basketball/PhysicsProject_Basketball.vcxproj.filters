@@ -17,6 +17,7 @@
     <ClCompile Include="CreateSprite.cpp" />
     <ClCompile Include="TextCache.cpp" />
     <ClCompile Include="CreateText.cpp" />
+    <ClCompile Include="ScoreSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Basketball.h" />
@@ -36,5 +37,6 @@
     <ClInclude Include="TextCache.h" />
     <ClInclude Include="CreateSprite.h" />
     <ClInclude Include="CreateText.h" />
+    <ClInclude Include="ScoreSystem.h" />
   </ItemGroup>
 </Project>

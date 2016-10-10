@@ -22,6 +22,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Players.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="ScoreSystem.cpp" />
     <ClCompile Include="SpriteCache.cpp" />
     <ClCompile Include="TextCache.cpp" />
     <ClCompile Include="TextureCache.cpp" />
@@ -36,6 +37,7 @@
     <ClInclude Include="CreateText.h" />
     <ClInclude Include="drawSprite.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="ScoreSystem.h" />
     <ClInclude Include="TextCache.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="CreateSprite.h" />

@@ -17,11 +17,17 @@ void Game::settings()
 	gameState = GAMESTATE::PLAY;
 	window.setFramerateLimit(60);
 
+
 	_entities.push_back(std::make_shared<Basketball_Court>(_resource));
 	_entities.push_back(std::make_shared<Basketball_hoop>(_resource));
+	_entities.push_back(std::make_shared<ScoreSystem>(_resource));
 	basketball = std::make_shared<Basketball>(_resource, pixelsPerMeter);
 	_entities.push_back(std::make_shared<Players>(_resource, basketball));
+	
+
+	
 }
+
 
 void Game::run()
 {

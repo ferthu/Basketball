@@ -20,7 +20,6 @@ public:
 	virtual void initialize(int screenWidth, int screenHeight) = 0;
 	virtual void update(float delta) = 0;
 	virtual void draw(sf::RenderWindow& window) = 0;
-	virtual sf::Sprite& getSprite() = 0;
 
 protected:
 	std::shared_ptr<ResourceManager> RM = std::make_shared<ResourceManager>(); // Resource Manager
