@@ -18,13 +18,14 @@ public:
 	bool getActive();
 	void setActive(bool active);
 
-	int getPlayerTurn();
+	static int getPlayerTurn();
 	void setPlayerTurn(int playerTurn);
 
 	bool getReset();
 	void setReset(bool reset);
+	
 private:
-	int playerTurn;
+	static int playerTurn;
 	bool active;
 	bool reset; // True if the reset button was hit. Then it goes back to false.
 	std::shared_ptr<Basketball> ball;

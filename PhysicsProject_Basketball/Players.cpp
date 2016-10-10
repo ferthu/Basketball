@@ -1,9 +1,10 @@
 #include "Players.h"
 #include <iostream>
 
+int Players::playerTurn = 1;
 Players::Players(std::shared_ptr<ResourceManager> resource, std::shared_ptr<Basketball> ball) : Entity(resource)
 {
-	playerTurn = 1;
+	
 	this->ball = ball;
 	active = true;
 	reset = false;
@@ -21,7 +22,6 @@ void Players::initialize(int screenWidth, int screenHeight)
 	RM->getSprite("BlackPlayer").setPosition(basePosition);
 	RM->getSprite("RedPlayer").setPosition(basePosition);
 }
-
 
 void Players::update(float delta)
 {
