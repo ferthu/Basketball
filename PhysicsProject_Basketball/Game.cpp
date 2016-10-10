@@ -55,8 +55,8 @@ void Game::gameLoop()
 			/*else if (sf::Event::MouseMoved)
 			{
 				std::cout << "X: " << event.mouseMove.x << " Y: " << event.mouseMove.y << std::endl;
-			}*/
-			else
+			}
+			else*/
 			{
 				gameUI->HandleEvents(event);
 			}
@@ -108,7 +108,7 @@ void Game::update(float delta)
 		{
 			walls[i]->checkBallCollision(*basketball, pixelsPerMeter, delta);
 		}
-		
+		hoop->handleHoopCollision(*basketball);
 	}
 }
 
