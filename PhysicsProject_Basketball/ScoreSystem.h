@@ -21,8 +21,8 @@ public:
 	void setScoreBoard(std::string scoreboard);
 	std::string getScoreBoard();
 
-	void incrementBlackPlayerScore();
-	void incrementRedPlayerScore();
+	static void incrementBlackPlayerScore();
+	static void incrementRedPlayerScore();
 	
 
 private:
@@ -32,8 +32,8 @@ private:
 	// The Text that displays the score
 	std::string scoreBoard;
 	// Current Score of Red Player & Black Player
-	int currBlackPlayerScore;
-	int currRedPlayerScore;
+	static int currBlackPlayerScore;
+	static int currRedPlayerScore;
 	
 };
 

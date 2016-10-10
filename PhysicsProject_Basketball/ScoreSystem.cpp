@@ -1,11 +1,13 @@
 #include "ScoreSystem.h"
 
+// Initializing Static Members
+int ScoreSystem::currBlackPlayerScore = 0;
+int ScoreSystem::currRedPlayerScore = 0;
 
 ScoreSystem::ScoreSystem(std::shared_ptr<ResourceManager> resource) : Entity(resource)
 {
 	winningScore = 5;
-	currBlackPlayerScore = 0;
-	currRedPlayerScore = 0;
+	
 	scoreBoard = "Score - First To " + std::to_string(winningScore) + " Wins"
 		"\n\nBlack Player: " + std::to_string(currBlackPlayerScore) + "\n\n"
 		"Red Player: " + std::to_string(currRedPlayerScore);
@@ -68,10 +70,10 @@ std::string ScoreSystem::getScoreBoard()
 
 void ScoreSystem::incrementBlackPlayerScore()
 {
-	this->currBlackPlayerScore++;
+	currBlackPlayerScore++;
 }
 
 void ScoreSystem::incrementRedPlayerScore()
 {
-	this->currRedPlayerScore++;
+	currRedPlayerScore++;
 }
