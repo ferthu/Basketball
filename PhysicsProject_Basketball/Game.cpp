@@ -2,6 +2,7 @@
 #include <SFGUI/SFGUI.hpp>
 #include <SFGUI/Widgets.hpp>
 #include <iostream>
+#include <math.h>
 
 Game::Game()
 {
@@ -62,7 +63,7 @@ void Game::gameLoop()
 		}
 
 		time = gameTime.getElapsedTime();
-		update(gameTime.restart().asSeconds());
+		update(std::min(gameTime.restart().asSeconds(), 0.02f));
 		window.clear(sf::Color(135,206,250,255));
 		draw();
 		window.display();
@@ -85,10 +86,10 @@ void Game::initializeGame()
 	gameUI = new UI(basketball);
 
 	
-	walls[0] = std::make_shared<Wall>(sf::Vector2f(0.0f, 1.0f), 0.0f, 0.8f);					// top
-	walls[1] = std::make_shared<Wall>(sf::Vector2f(1.0f, 0.0f), 0.0f, 0.8f);					// left
-	walls[2] = std::make_shared<Wall>(sf::Vector2f(0.0f, -1.0f), (float)screenHeight, 0.8f);    // bottom
-	walls[3] = std::make_shared<Wall>(sf::Vector2f(-0.5f, 0.0f), (float)screenWidth, 0.8f);	   // right
+	walls[0] = std::make_shared<Wall>(sf::Vector2f(0.0f, 1.0f), 0.0f, 0.95f);					// top
+	walls[1] = std::make_shared<Wall>(sf::Vector2f(1.0f, 0.0f), 0.0f, 0.95f);					// left
+	walls[2] = std::make_shared<Wall>(sf::Vector2f(0.0f, -1.0f), (float)screenHeight, 0.95f);    // bottom
+	walls[3] = std::make_shared<Wall>(sf::Vector2f(-0.5f, 0.0f), (float)screenWidth, 0.95f);	   // right
 }
 
 void Game::update(float delta)
@@ -117,7 +118,7 @@ void Game::draw()
 		i->draw(window); 	
 	}
 
-	basketball->draw(window);
 	hoop->draw(window);
+	basketball->draw(window);
 	gameUI->Draw(window);
 }

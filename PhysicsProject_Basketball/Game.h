@@ -60,7 +60,7 @@ private:
 	std::shared_ptr<ResourceManager> _resource; 
 	std::vector<std::shared_ptr<Entity>> _entities;
 
-	const float pixelsPerMeter = 100.0f;
+	const float pixelsPerMeter = 50.0f;
 
 	//Walls
 	std::shared_ptr<Wall> walls[4];
