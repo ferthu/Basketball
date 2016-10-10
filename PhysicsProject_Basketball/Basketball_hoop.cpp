@@ -25,7 +25,7 @@ void Basketball_hoop::update(float delta)
 void Basketball_hoop::draw(sf::RenderWindow& window)
 {
 	window.draw(RM->getSprite("basketball_hoop"));
-	window.draw(basketCollisionRect);
+	//window.draw(basketCollisionRect);
 }
 
 sf::Sprite& Basketball_hoop::getSprite()
