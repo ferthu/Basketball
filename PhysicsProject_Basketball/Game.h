@@ -64,6 +64,9 @@ private:
 
 	//Walls
 	std::shared_ptr<Wall> walls[4];
+
+	// Game Ends
+	bool gameOver;
 	
 };
 #endif

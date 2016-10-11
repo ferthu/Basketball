@@ -8,7 +8,7 @@ Game::Game()
 {
 	screenWidth = 1024;
 	screenHeight = 600;
-
+	gameOver = false;
 	_resource = std::make_shared<ResourceManager>();
 }
 
@@ -21,11 +21,11 @@ void Game::settings()
 
 	_entities.push_back(std::make_shared<Basketball_Court>(_resource));
 	//_entities.push_back(std::make_shared<Basketball_hoop>(_resource, sf::Vector2f(-1.0f, 0.0f), (float)screenWidth - 150.0f, 0.8f));
-	_entities.push_back(std::make_shared<ScoreSystem>(_resource));
+	
 	hoop = std::make_shared<Basketball_hoop>(_resource);
 	basketball = std::make_shared<Basketball>(_resource, pixelsPerMeter);
 	_entities.push_back(std::make_shared<Players>(_resource, basketball));
-	
+	_entities.push_back(std::make_shared<ScoreSystem>(_resource));
 
 	
 }
@@ -52,11 +52,8 @@ void Game::gameLoop()
 			{
 				gameState = GAMESTATE::EXIT;
 			}
-			/*else if (sf::Event::MouseMoved)
-			{
-				std::cout << "X: " << event.mouseMove.x << " Y: " << event.mouseMove.y << std::endl;
-			}
-			else*/
+			
+			if (!gameOver)
 			{
 				gameUI->HandleEvents(event);
 			}
@@ -80,7 +77,6 @@ void Game::initializeGame()
 		i->initialize(screenWidth, screenHeight);
 	}
 
-	
 	basketball->initialize(screenWidth, screenHeight);
 	hoop->pixelsPerMeter = pixelsPerMeter;
 	hoop->initialize(screenWidth, screenHeight);
@@ -102,6 +98,7 @@ void Game::update(float delta)
 	gameUI->Update(delta);
 	basketball->update(delta);
 	hoop->update(delta);
+	gameOver = hoop->getGameOver();
 	if (basketball->getActive())
 	{
 		for (int i = 0; i < 4; i++)

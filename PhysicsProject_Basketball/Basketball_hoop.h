@@ -25,7 +25,7 @@ public:
 	sf::Vector2f leftOfBasket, rightOfBasket, topOfPlank, bottomOfPlank;
 	float size;
 	float pixelsPerMeter;
-
+	bool getGameOver();
 	
 private:
 

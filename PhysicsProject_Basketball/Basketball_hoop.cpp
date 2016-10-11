@@ -67,12 +67,19 @@ void Basketball_hoop::handleHoopCollision(Basketball& ball)
 				if (Players::getPlayerTurn() == 1)
 				{
 					ScoreSystem::incrementBlackPlayerScore();
+					ball.setFail(true);
 				}
 				else if (Players::getPlayerTurn() == 2)
 				{
 					ScoreSystem::incrementRedPlayerScore();
+					ball.setFail(true);
 				}
 			}
 		}
 	}
+}
+
+bool Basketball_hoop::getGameOver()
+{
+	return Players::getGameOver();
 }
