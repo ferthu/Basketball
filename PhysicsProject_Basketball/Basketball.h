@@ -30,6 +30,8 @@ public:
 	void setVelocity(const sf::Vector2f& velocity);
 	void setFail(bool active);
 	bool getFail();
+	void setScored(bool scored);
+	bool getScored();
 
 	void handleCollision(sf::Vector2f otherCollisionNormal, float otherCollisionPlaneDistance, float e, float delta);
 	
@@ -53,6 +55,7 @@ private:
 	bool active;
 	// Ball Hit a wall, Cant score anymore.
 	bool fail;
+	bool scored;
 	// start position of ball
 	sf::Vector2f basePosition;
 	sf::Vector2f position;

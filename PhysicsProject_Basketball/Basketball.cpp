@@ -12,7 +12,7 @@ Basketball::Basketball(std::shared_ptr<ResourceManager> resource, float pixelsPe
 
 	active = false;
 	fail = false;
-
+	scored = false;
 	this->pixelsPerMeter = pixelsPerMeter;
 
 	basePosition = sf::Vector2f(170.0f, 385.0f);
@@ -151,6 +151,16 @@ void Basketball::setFail(bool active)
 bool Basketball::getFail()
 {
 	return fail;
+}
+
+void Basketball::setScored(bool scored)
+{
+	this->scored = scored;
+}
+
+bool Basketball::getScored()
+{
+	return scored;
 }
 
 void Basketball::handleCollision(sf::Vector2f otherCollisionNormal, float otherCollisionPlaneDistance, float e, float delta)

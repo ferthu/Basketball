@@ -37,10 +37,7 @@ private:
 	static bool reset; // True if the reset button was hit. Then it goes back to false.
 	bool startSuddenDeath;
 	static bool gameOver;
-	bool redPlayerLost;
-	bool blackPlayerLost;
-	bool rpm;
-	bool bpm;
+	bool blackPlayerScored;
 	std::shared_ptr<Basketball> ball;
 	sf::Vector2f basePosition;
 	int counter;

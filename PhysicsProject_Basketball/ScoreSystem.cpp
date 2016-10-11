@@ -38,14 +38,14 @@ void ScoreSystem::initialize(int screenWidth, int screenHeight)
 	RM->getText("BlackPlayerWins").setCharacterSize(100);
 	RM->getText("BlackPlayerWins").setStyle(sf::Text::Style::Bold | sf::Text::Style::Underlined);
 	RM->getText("BlackPlayerWins").setColor(sf::Color::Black);
-	RM->getText("BlackPlayerWins").setPosition(screenWidth / 4.0f, screenHeight / 2.0f);
-	RM->getText("BlackPlayerWins").setString("BLACK PLAYER WINS!!!");
+	RM->getText("BlackPlayerWins").setPosition(screenWidth / 8.0f, screenHeight / 2.0f);
+	RM->getText("BlackPlayerWins").setString("BLACK PLAYER\n\t\tWINS!!!");
 
-	RM->getText("RedPlayerWins").setCharacterSize(50);
-	RM->getText("RedPlayerWins").setStyle(sf::Text::Style::Bold);
+	RM->getText("RedPlayerWins").setCharacterSize(100);
+	RM->getText("RedPlayerWins").setStyle(sf::Text::Style::Bold | sf::Text::Style::Underlined);
 	RM->getText("RedPlayerWins").setColor(sf::Color::Red);
-	RM->getText("RedPlayerWins").setPosition(screenWidth / 2.0f, screenHeight / 2.0f);
-	RM->getText("RedPlayerWins").setString("RED PLAYER WINS!!!");
+	RM->getText("RedPlayerWins").setPosition(screenWidth / 8.0f, screenHeight / 2.5f);
+	RM->getText("RedPlayerWins").setString("RED PLAYER\n\t\tWINS!!!");
 }
 void ScoreSystem::update(float delta)
 {
@@ -61,11 +61,12 @@ void ScoreSystem::draw(sf::RenderWindow& window)
 {
 	window.draw(RM->getSprite("ScoreBoard"));
 	window.draw(RM->getText("ScoreBoard"));
-
+	
 	if (getBlackPlayerWins())
 	{
 		window.draw(RM->getText("BlackPlayerWins"));
 	}
+
 	else if (getRedPlayerWins())
 	{
 		window.draw(RM->getText("RedPlayerWins"));

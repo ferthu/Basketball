@@ -58,7 +58,7 @@ void Basketball_hoop::setRectangleShape(sf::Vector2f position, sf::Vector2f size
 
 void Basketball_hoop::handleHoopCollision(Basketball& ball)
 {
-	if (!ball.getFail())
+	if (!ball.getScored())
 	{
 		if ((ball.getPosition().x - 12.0f) > leftOfBasket.x && ball.getPosition().x + 8.0f < rightOfBasket.x)
 		{
@@ -67,12 +67,12 @@ void Basketball_hoop::handleHoopCollision(Basketball& ball)
 				if (Players::getPlayerTurn() == 1)
 				{
 					ScoreSystem::incrementBlackPlayerScore();
-					ball.setFail(true);
+					ball.setScored(true);
 				}
 				else if (Players::getPlayerTurn() == 2)
 				{
 					ScoreSystem::incrementRedPlayerScore();
-					ball.setFail(true);
+					ball.setScored(true);
 				}
 			}
 		}

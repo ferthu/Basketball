@@ -11,10 +11,9 @@ Players::Players(std::shared_ptr<ResourceManager> resource, std::shared_ptr<Bask
 	active = true;
 	startSuddenDeath = false;
 	counter = 0;
-	redPlayerLost = false;
-	blackPlayerLost = false;
-	rpm = false;
-	bpm = false;
+
+	blackPlayerScored = false;
+
 	tempBlackPlayerScore = -1;
 	tempRedPlayerScore = -1;
 }
@@ -52,6 +51,7 @@ void Players::update(float delta)
 			playerTurn = 2;
 			reset = false;
 			setActive(true);
+			ball->setScored(false);
 		}
 	}
 	else if (playerTurn == 2)
@@ -70,6 +70,7 @@ void Players::update(float delta)
 			playerTurn = 1;
 			reset = false;
 			setActive(true);
+			ball->setScored(false);
 		}
 	}
 	
@@ -112,51 +113,51 @@ void Players::suddenDeath()
 		tempRedPlayerScore = ScoreSystem::getCurrRedPlayerScore();
 	}
 
-	//if (ScoreSystem::getCurrBlackPlayerScore() == tempBlackPlayerScore + 1) // Black Player Scores
-	//{
-	//	bpm = false;
-	//	tempBlackPlayerScore = ScoreSystem::getCurrBlackPlayerScore();
-	//}
-	//else if (ScoreSystem::getCurrBlackPlayerScore() == tempBlackPlayerScore && ball->getFail() == false )// Black Player Missed
-	//{
-	//	
-	//	if (playerTurn == 1)
-	//	{
-	//		if (ball->getFail() && !active)
-	//		{
-	//				bpm = true;
-	//		}
-	//	}
-	//	
-	//}
+	if (ball->getActive())
+	{
+		if (active == false)
+		{
+			if (playerTurn == 1)
+			{
+				if (ScoreSystem::getCurrBlackPlayerScore() == tempBlackPlayerScore + 1) // Black Player Scores
+				{
+					tempBlackPlayerScore = ScoreSystem::getCurrBlackPlayerScore();
+					blackPlayerScored = true;
+				}
+				else
+				{
+					if (!ball->getScored() && ball->getFail())//ball->getFail() && ScoreSystem::getCurrBlackPlayerScore() == tempBlackPlayerScore)
+					{
+						blackPlayerScored = false;
+					}
+				}
+			}
+			else if (playerTurn == 2)
+			{
+				if (ScoreSystem::getCurrRedPlayerScore() == tempRedPlayerScore + 1) // Red Player Scores
+				{
+					tempRedPlayerScore = ScoreSystem::getCurrRedPlayerScore();
 
-	//if (ScoreSystem::getCurrRedPlayerScore() == tempRedPlayerScore + 1) // Red Player Scores
-	//{
-	//	if (bpm)
-	//	{
-	//		ScoreSystem::setRedPlayerWins(true);
-	//		gameOver = true;
-	//	}
-
-	//	
-	//	tempRedPlayerScore = ScoreSystem::getCurrRedPlayerScore();
-	//}
-	//else if (ScoreSystem::getCurrRedPlayerScore() == tempRedPlayerScore && ball->getFail() == false)
-	//{
-	//	if (playerTurn == 2)
-	//	{
-	//		if (ball->getFail() && !active)
-	//		{
-	//			rpm = true;
-	//		}
-	//	}
-	//}
-
-	//if (rpm)
-	//{
-	//	ScoreSystem::setBlackPlayerWins(true);
-	//	gameOver = true;
-	//}
+					if (blackPlayerScored == false)
+					{
+						ScoreSystem::setRedPlayerWins(true);
+						gameOver = true;
+					}
+				}
+				else
+				{
+					if (!ball->getScored() && ball->getFail())
+					{
+						if (blackPlayerScored == true)
+						{
+							ScoreSystem::setBlackPlayerWins(true);
+							gameOver = true;
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 void Players::setGameOver(bool newGameOver)
