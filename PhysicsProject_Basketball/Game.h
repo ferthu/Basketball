@@ -13,6 +13,8 @@
 #include "UI.h"
 #include "Wall.h"
 #include "CollisionObject.h"
+#include "BasketCollision.h"
+#include "PlankCollision.h"
 
 #include <vector>
 
@@ -64,6 +66,11 @@ private:
 
 	//Walls
 	std::shared_ptr<Wall> walls[4];
+
+	// basket collision
+	std::shared_ptr<BasketCollision> basketCollision;
+	// plank collision
+	std::shared_ptr<PlankCollision> plankCollision;
 
 	// Game Ends
 	bool gameOver;

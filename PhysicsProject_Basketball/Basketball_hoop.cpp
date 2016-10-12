@@ -64,6 +64,10 @@ void Basketball_hoop::handleHoopCollision(Basketball& ball)
 		{
 			if (ball.getPosition().y + 12.0f > leftOfBasket.y && ball.getPosition().y - 12.0f < leftOfBasket.y)
 			{
+				// reduce velocity to simulate net slowing down ball
+				ball.setVelocity(ball.getVelocity() * 0.5f - sf::Vector2f(0.0f, ball.getVelocity().x * 0.5f));
+				ball.setAngularVelocity(ball.getAngluarVelocity() * 0.5f);
+
 				if (Players::getPlayerTurn() == 1)
 				{
 					ScoreSystem::incrementBlackPlayerScore();

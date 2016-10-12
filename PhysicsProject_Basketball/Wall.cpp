@@ -9,7 +9,7 @@ Wall::Wall(sf::Vector2f normal, float distance, float e)
 	this->e = e;
 }
 
-void Wall::checkBallCollision(Basketball& ball, float pixelsPerMeter, float delta)
+void Wall::checkBallCollision(Basketball& ball, float delta)
 {
 	ball.handleCollision(normal, distance, e, delta);
 }

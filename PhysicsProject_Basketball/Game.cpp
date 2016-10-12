@@ -1,4 +1,6 @@
 #include "Game.h"
+#include "BasketCollision.h"
+#include "PlankCollision.h"
 #include <SFGUI/SFGUI.hpp>
 #include <SFGUI/Widgets.hpp>
 #include <iostream>
@@ -60,7 +62,16 @@ void Game::gameLoop()
 		}
 
 		time = gameTime.getElapsedTime();
+
+		// slowmotion for debugging
+		//update(0.005f);
+
+		// 60 fps
+		//update(1.0f / 60.0f);
+
+		// dynamic delta
 		update(std::min(gameTime.restart().asSeconds(), 0.02f));
+
 		window.clear(sf::Color(135,206,250,255));
 		draw();
 		window.display();
@@ -87,6 +98,8 @@ void Game::initializeGame()
 	walls[1] = std::make_shared<Wall>(sf::Vector2f(1.0f, 0.0f), 0.0f, 0.95f);					// left
 	walls[2] = std::make_shared<Wall>(sf::Vector2f(0.0f, -1.0f), (float)screenHeight, 0.95f);    // bottom
 	walls[3] = std::make_shared<Wall>(sf::Vector2f(-0.5f, 0.0f), (float)screenWidth, 0.95f);	   // right
+	basketCollision = std::make_shared<BasketCollision>(hoop->leftOfBasket, hoop->rightOfBasket, 0.95f);
+	plankCollision = std::make_shared<PlankCollision>(hoop->topOfPlank.x, hoop->topOfPlank, hoop->bottomOfPlank, 0.95f);
 }
 
 void Game::update(float delta)
@@ -103,8 +116,10 @@ void Game::update(float delta)
 	{
 		for (int i = 0; i < 4; i++)
 		{
-			walls[i]->checkBallCollision(*basketball, pixelsPerMeter, delta);
+			walls[i]->checkBallCollision(*basketball, delta);
 		}
+		basketCollision->checkBallCollision(*basketball, delta);
+		plankCollision->checkBallCollision(*basketball, delta);
 		hoop->handleHoopCollision(*basketball);
 	}
 }
@@ -116,7 +131,7 @@ void Game::draw()
 		i->draw(window); 	
 	}
 
-	hoop->draw(window);
 	basketball->draw(window);
+	hoop->draw(window);
 	gameUI->Draw(window);
 }

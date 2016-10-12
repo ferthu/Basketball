@@ -2,6 +2,7 @@
 #include "VectorFunctions.h"
 #include <cmath>
 #include <iostream>
+
 Basketball::Basketball(std::shared_ptr<ResourceManager> resource, float pixelsPerMeter) : Entity(resource)
 {
 	radius = 0.1213f; 
@@ -32,13 +33,12 @@ void Basketball::initialize(int screenWidth, int screenHeight)
 }
 void Basketball::update(float delta)
 {
-	
 	if (active)
 	{
 		velocity += sf::Vector2f(0.0f, 9.82f) * delta;
 
 		if (angularVelocity > 500.f || angularVelocity < -500.0f)
-			angularVelocity -= angularVelocity * 0.01f * delta;
+			angularVelocity -= angularVelocity * 0.1f * delta;
 
 		// air drag
 		sf::Vector2f velocityDirection = normalize(velocity);
@@ -56,19 +56,11 @@ void Basketball::update(float delta)
 
 		position += velocity * delta * pixelsPerMeter;
 		angle += angularVelocity * delta;
-
-		//angularVelocity = angularVelocity * std::powf(0.999f, std::powf((angularVelocity >= 0.0f ? angularVelocity : -angularVelocity) / 10000.0f, 2.0f));
-		
-		/*while (angle > 6.28318530718f)
-			angle -= 6.28318530718f;
-		while (angle < 0)
-			angle += 6.28318530718f;*/
 	}
 }
 
 void Basketball::draw(sf::RenderWindow& window)
 {
-	
 	// Final Position of the ball
 	RM->getSprite("basketball").setPosition(position);
 	// Position Of The Ball's collision circle.

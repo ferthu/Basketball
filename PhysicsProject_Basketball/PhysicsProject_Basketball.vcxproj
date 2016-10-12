@@ -14,12 +14,14 @@
     <ClCompile Include="Basketball.cpp" />
     <ClCompile Include="Basketball_Court.cpp" />
     <ClCompile Include="Basketball_hoop.cpp" />
+    <ClCompile Include="BasketCollision.cpp" />
     <ClCompile Include="CreateText.cpp" />
     <ClCompile Include="drawSprite.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="CreateSprite.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PlankCollision.cpp" />
     <ClCompile Include="Players.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="ScoreSystem.cpp" />
@@ -27,16 +29,19 @@
     <ClCompile Include="TextCache.cpp" />
     <ClCompile Include="TextureCache.cpp" />
     <ClCompile Include="UI.cpp" />
+    <ClCompile Include="VectorFunctions.cpp" />
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Basketball.h" />
     <ClInclude Include="Basketball_Court.h" />
     <ClInclude Include="Basketball_hoop.h" />
+    <ClInclude Include="BasketCollision.h" />
     <ClInclude Include="CollisionObject.h" />
     <ClInclude Include="CreateText.h" />
     <ClInclude Include="drawSprite.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="PlankCollision.h" />
     <ClInclude Include="ScoreSystem.h" />
     <ClInclude Include="TextCache.h" />
     <ClInclude Include="Game.h" />
