@@ -57,6 +57,7 @@ void Players::update(float delta)
 			reset = false;
 			setActive(true);
 			ball->setScored(false);
+			ball->setFail(true);
 		}
 	}
 	else if (playerTurn == 2)
@@ -76,6 +77,7 @@ void Players::update(float delta)
 			reset = false;
 			setActive(true);
 			ball->setScored(false);
+			ball->setFail(true);
 		}
 	}
 
@@ -111,6 +113,7 @@ void Players::victory()
 	{
 		if (ball->getFail())
 		{
+			std::cout << "Normal Win" << std::endl;
 			ScoreSystem::setBlackPlayerWins(true);
 			gameOver = true;
 		}
@@ -178,6 +181,7 @@ void Players::suddenDeath()
 					{
 						if (blackPlayerScored == true)
 						{
+							std::cout << "Sudden Death Win" << std::endl;
 							ScoreSystem::setBlackPlayerWins(true);
 							gameOver = true;
 						}
