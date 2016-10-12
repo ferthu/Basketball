@@ -33,9 +33,13 @@ void Players::initialize(int screenWidth, int screenHeight)
 
 void Players::update(float delta)
 {
-	victory();
+	if (startSuddenDeath == false)
+	{
+		victory();
+	}
+	
 	checkIfSuddenDeath();
-
+	std::cout << ScoreSystem::getBlackPlayerWins() << std::endl;
 	if (playerTurn == 1)
 	{
 		// When Player 1 presses start
@@ -112,8 +116,6 @@ void Players::victory()
 		}
 
 	}
-
-
 }
 
 void Players::checkIfSuddenDeath()
@@ -142,8 +144,7 @@ void Players::suddenDeath()
 
 	if (ball->getActive())
 	{
-		if (active == false)
-		{
+		
 			if (playerTurn == 1)
 			{
 				if (ScoreSystem::getCurrBlackPlayerScore() == tempBlackPlayerScore + 1) // Black Player Scores
@@ -153,7 +154,7 @@ void Players::suddenDeath()
 				}
 				else
 				{
-					if (!ball->getScored() && ball->getFail())//ball->getFail() && ScoreSystem::getCurrBlackPlayerScore() == tempBlackPlayerScore)
+					if (!ball->getScored() && ball->getFail())
 					{
 						blackPlayerScored = false;
 					}
@@ -183,7 +184,7 @@ void Players::suddenDeath()
 					}
 				}
 			}
-		}
+		
 	}
 }
 
