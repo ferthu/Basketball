@@ -39,7 +39,7 @@ void Players::update(float delta)
 	}
 	
 	checkIfSuddenDeath();
-	std::cout << ScoreSystem::getBlackPlayerWins() << std::endl;
+
 	if (playerTurn == 1)
 	{
 		// When Player 1 presses start
