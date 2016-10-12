@@ -6,7 +6,7 @@ bool Players::reset = false;
 bool Players::gameOver = false;
 Players::Players(std::shared_ptr<ResourceManager> resource, std::shared_ptr<Basketball> ball) : Entity(resource)
 {
-	
+
 	this->ball = ball;
 	active = true;
 	startSuddenDeath = false;
@@ -33,6 +33,7 @@ void Players::initialize(int screenWidth, int screenHeight)
 
 void Players::update(float delta)
 {
+	victory();
 	checkIfSuddenDeath();
 
 	if (playerTurn == 1)
@@ -73,20 +74,46 @@ void Players::update(float delta)
 			ball->setScored(false);
 		}
 	}
-	
+
 }
 
 void Players::draw(sf::RenderWindow& window)
 {
-	
+
 	if (playerTurn == 1 && active)
 	{
 		window.draw(RM->getSprite("BlackPlayer"));
 	}
 	else if (playerTurn == 2 && active)
-	{ 
+	{
 		window.draw(RM->getSprite("RedPlayer"));
 	}
+}
+
+void Players::victory()
+{
+
+	if (ScoreSystem::getBlackPlayerTriesLeft() == 0 && ScoreSystem::getCurrRedPlayerScore() > ScoreSystem::getCurrBlackPlayerScore())
+	{
+		if (ball->getFail())
+		{
+			ScoreSystem::setRedPlayerWins(true);
+			gameOver = true;
+		}
+
+
+	}
+	else if (ScoreSystem::getRedPlayerTriesLeft() == 0 && ScoreSystem::getCurrBlackPlayerScore() > ScoreSystem::getCurrRedPlayerScore())
+	{
+		if (ball->getFail())
+		{
+			ScoreSystem::setBlackPlayerWins(true);
+			gameOver = true;
+		}
+
+	}
+
+
 }
 
 void Players::checkIfSuddenDeath()
