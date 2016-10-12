@@ -28,8 +28,6 @@ void Game::settings()
 	basketball = std::make_shared<Basketball>(_resource, pixelsPerMeter);
 	_entities.push_back(std::make_shared<Players>(_resource, basketball));
 	_entities.push_back(std::make_shared<ScoreSystem>(_resource));
-
-	
 }
 
 
@@ -104,14 +102,11 @@ void Game::initializeGame()
 
 void Game::update(float delta)
 {
-	for (auto& i : _entities)
-	{
-		i->update(delta);
-	}
 	gameUI->Update(delta);
 	basketball->update(delta);
 	hoop->update(delta);
 	gameOver = hoop->getGameOver();
+
 	if (basketball->getActive())
 	{
 		for (int i = 0; i < 4; i++)
@@ -122,6 +117,14 @@ void Game::update(float delta)
 		plankCollision->checkBallCollision(*basketball, delta);
 		hoop->handleHoopCollision(*basketball);
 	}
+
+	for (auto& i : _entities)
+	{
+		i->update(delta);
+	}
+	
+
+	
 }
 
 void Game::draw()
