@@ -37,8 +37,7 @@ void Basketball::update(float delta)
 	{
 		velocity += sf::Vector2f(0.0f, 9.82f) * delta;
 
-		if (angularVelocity > 500.f || angularVelocity < -500.0f)
-			angularVelocity -= angularVelocity * 0.1f * delta;
+		angularVelocity -= angularVelocity * 0.05f * delta;
 
 		// air drag
 		sf::Vector2f velocityDirection = normalize(velocity);
@@ -175,8 +174,13 @@ void Basketball::handleCollision(sf::Vector2f otherCollisionNormal, float otherC
 			// find surface direction
 			sf::Vector2f surfaceDirection = -v3tov2(cross(v2tov3(otherCollisionNormal), sf::Vector3f(0.0f, 0.0f, 1.0f)));
 
-			sf::Vector2f newVelocity = (((1 - (2.0f / 5.0f) * e) * dot(surfaceDirection, velocity) + (2.0f / 5.0f) * (1.0f + e) * radius * -angularVelocity) / (1.0f + 2.0f / 5.0f)) * surfaceDirection - e * dot(velocity, otherCollisionNormal) * otherCollisionNormal;
-			angularVelocity = -((1.0f + e) * dot(surfaceDirection, velocity) + (2.0f / 5.0f - e) * radius * -angularVelocity) / (radius * (1.0f + 2.0f / 5.0f));
+			sf::Vector2f newVelocity = (((1 - (2.0f / 3.0f) * e) * dot(surfaceDirection, velocity) + (2.0f / 3.0f) * (1.0f + e) * radius * -angularVelocity) / (1.0f + 2.0f / 3.0f)) * surfaceDirection - e * dot(velocity, otherCollisionNormal) * otherCollisionNormal;
+
+			float ex = 0.1f;
+
+			angularVelocity = -((1.0f + ex) * dot(surfaceDirection, velocity) + (2.0f / 3.0f - ex) * radius * -angularVelocity) / (radius * (1.0f + 2.0f / 3.0f));
+			angularVelocity -= angularVelocity * 0.2f * delta;
+
 			velocity = newVelocity;
 		}
 	}
