@@ -66,7 +66,6 @@ void ScoreSystem::draw(sf::RenderWindow& window)
 	{
 		window.draw(RM->getText("BlackPlayerWins"));
 	}
-
 	else if (getRedPlayerWins())
 	{
 		window.draw(RM->getText("RedPlayerWins"));

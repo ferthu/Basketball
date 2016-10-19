@@ -65,7 +65,7 @@ void UI::ResetBall()
 {
 	if (ball->getActive())
 	{
-		ball->setFail(false);
+		
 		ball->setPosition(ball->getBasePosition());
 		ball->setActive(false);
 		ball->setAngle(0.0f);
@@ -76,6 +76,7 @@ void UI::StartBall()
 {
 	if (!ball->getActive())
 	{
+		ball->setFail(false);
 		ball->setActive(true);
 
 		ball->setVelocity(sf::Vector2f(std::stof(velocityXEntry->GetText().toAnsiString()), -std::stof(velocityYEntry->GetText().toAnsiString())));

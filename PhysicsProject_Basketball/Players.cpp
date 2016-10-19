@@ -6,7 +6,7 @@ bool Players::reset = false;
 bool Players::gameOver = false;
 Players::Players(std::shared_ptr<ResourceManager> resource, std::shared_ptr<Basketball> ball) : Entity(resource)
 {
-	
+
 	this->ball = ball;
 	active = true;
 	startSuddenDeath = false;
@@ -33,6 +33,12 @@ void Players::initialize(int screenWidth, int screenHeight)
 
 void Players::update(float delta)
 {
+	
+	if (startSuddenDeath == false && ScoreSystem::getCurrBlackPlayerScore() != ScoreSystem::getCurrRedPlayerScore())
+	{
+		victory();
+	}
+
 	checkIfSuddenDeath();
 
 	if (playerTurn == 1)
@@ -52,6 +58,8 @@ void Players::update(float delta)
 			reset = false;
 			setActive(true);
 			ball->setScored(false);
+			ball->setFail(true);
+			
 		}
 	}
 	else if (playerTurn == 2)
@@ -67,10 +75,12 @@ void Players::update(float delta)
 		// When player 2 presses reset
 		else if (!ball->getActive() && reset)
 		{
+			blackPlayerScored = false;
 			playerTurn = 1;
 			reset = false;
 			setActive(true);
 			ball->setScored(false);
+			ball->setFail(true);
 		}
 	}
 	
@@ -78,15 +88,41 @@ void Players::update(float delta)
 
 void Players::draw(sf::RenderWindow& window)
 {
-	
+
 	if (playerTurn == 1 && active)
 	{
 		window.draw(RM->getSprite("BlackPlayer"));
 	}
 	else if (playerTurn == 2 && active)
-	{ 
+	{
 		window.draw(RM->getSprite("RedPlayer"));
 	}
+}
+
+void Players::victory()
+{
+
+	
+		if (ScoreSystem::getBlackPlayerTriesLeft() == 0 && ScoreSystem::getCurrRedPlayerScore() > ScoreSystem::getCurrBlackPlayerScore())
+		{
+			if (ball->getFail())
+			{
+				ScoreSystem::setRedPlayerWins(true);
+				gameOver = true;
+			}
+		}
+		else if (ScoreSystem::getRedPlayerTriesLeft() == 0 && ScoreSystem::getCurrBlackPlayerScore() > ScoreSystem::getCurrRedPlayerScore())
+		{
+			if (ball->getFail())
+			{
+				std::cout << "Normal Win" << std::endl;
+				ScoreSystem::setBlackPlayerWins(true);
+				gameOver = true;
+			}
+
+		}
+	
+	
 }
 
 void Players::checkIfSuddenDeath()
@@ -115,8 +151,6 @@ void Players::suddenDeath()
 
 	if (ball->getActive())
 	{
-		if (active == false)
-		{
 			if (playerTurn == 1)
 			{
 				if (ScoreSystem::getCurrBlackPlayerScore() == tempBlackPlayerScore + 1) // Black Player Scores
@@ -126,7 +160,7 @@ void Players::suddenDeath()
 				}
 				else
 				{
-					if (!ball->getScored() && ball->getFail())//ball->getFail() && ScoreSystem::getCurrBlackPlayerScore() == tempBlackPlayerScore)
+					if (!ball->getScored() && ball->getFail())
 					{
 						blackPlayerScored = false;
 					}
@@ -150,13 +184,14 @@ void Players::suddenDeath()
 					{
 						if (blackPlayerScored == true)
 						{
+							std::cout << "Sudden Death Win" << std::endl;
 							ScoreSystem::setBlackPlayerWins(true);
 							gameOver = true;
 						}
 					}
 				}
 			}
-		}
+		
 	}
 }
 

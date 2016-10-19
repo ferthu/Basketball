@@ -28,6 +28,8 @@ public:
 	void checkIfSuddenDeath();
 	void suddenDeath();
 
+	void victory(); // If a player wins
+
 	static void setGameOver(bool newGameOver);
 	static bool getGameOver();
 
